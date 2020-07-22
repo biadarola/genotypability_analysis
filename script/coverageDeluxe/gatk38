@@ -1,0 +1,20 @@
+#!/usr/bin/perl
+
+# by ciano
+
+use strict;
+use warnings;
+
+my $RAM  = '10G';
+my $GATK = './script/GenomeAnalysisTK-3.8-1-0/GenomeAnalysisTK.jar';
+my $TEMP = './temp';
+
+if ( -f $GATK && -d $TEMP )
+{
+    system( 'java', '-Duser.country=EN', '-Duser.language=us', "-Xmx$RAM",
+        "-Djava.io.tmpdir=$TEMP", '-jar', $GATK, @ARGV );
+}
+else
+{
+    print STDERR qq|\nAt least one path in $0 doesn't exist!!!\n\n|;
+}
